@@ -1,19 +1,8 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
-  "files.autoSave": "onFocusChange",
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
-  },
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "javascript.preferences.importModuleSpecifier": "relative",
-  "git.enableSmartCommit": true,
-  "git.confirmSync": false,
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "workbench.colorTheme": "Default Dark+",
-  "editor.minimap.enabled": false,
-  "breadcrumbs.enabled": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

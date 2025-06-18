@@ -1,12 +1,29 @@
 {
   "name": "housetasker",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
+    "start:clear": "expo start --clear",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint . --ext .ts,.tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "type-check": "tsc --noEmit",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "expo": "~53.0.11",
@@ -15,8 +32,24 @@
     "react-native": "0.79.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
+    "@babel/core": "^7.27.4",
+    "@eslint/js": "^9.29.0",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "@typescript-eslint/parser": "^8.34.1",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "jest": "^30.0.0",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.4.0",
     "typescript": "~5.8.3"
   },
   "private": true
