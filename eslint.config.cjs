@@ -7,6 +7,7 @@ const pluginReactHooks = require('eslint-plugin-react-hooks')
 const pluginImport = require('eslint-plugin-import')
 const pluginJsxA11y = require('eslint-plugin-jsx-a11y')
 const prettier = require('eslint-config-prettier')
+const globals = require('globals')
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 module.exports = [
@@ -19,6 +20,10 @@ module.exports = [
       parser, // Use TypeScript parser
       parserOptions: {
         project: './tsconfig.json', // Type-aware linting
+      },
+      globals: {
+        ...globals.node, //
+        ...globals.jest, //
       },
     },
     plugins: {
