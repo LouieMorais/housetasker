@@ -1,8 +1,5 @@
 import request from 'supertest'
 
-console.log('API URL:', process.env.SUPABASE_URL)
-console.log('Anon Key:', process.env.SUPABASE_ANON_KEY?.slice(0, 10)) // for sanity check
-
 const API = `${process.env.SUPABASE_URL}/rest/v1`
 const headers = {
   apikey: process.env.SUPABASE_ANON_KEY!,
