@@ -1,3 +1,4 @@
+// /App.tsx
 import React from 'react'
 
 import { SafeAreaView, StyleSheet } from 'react-native'
@@ -11,6 +12,7 @@ const App: React.FC = () => {
     </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
