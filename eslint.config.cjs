@@ -34,12 +34,19 @@ module.exports = [
       'jsx-a11y': pluginJsxA11y,
     },
     rules: {
+      // Disable base rule in favor of TypeScript version
+      'no-unused-vars': 'off',
       // General Best Practices
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       // TypeScript Specific
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+          // args: 'after-used', // This might help with arrow function params
+        },
       ],
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',

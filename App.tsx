@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-export default function App() {
+import { SafeAreaView, StyleSheet } from 'react-native'
+
+import TaskListScreen from './src/app/TaskListScreen'
+
+const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>HouseTasker - Soon</Text>
-      <Text>As to be seen on the New York Times in 2027</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <TaskListScreen />
+    </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 40,
   },
 })
+
+export default App
