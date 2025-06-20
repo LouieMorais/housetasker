@@ -5,6 +5,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>HouseTasker - Soon</Text>
+      <Text>As to be seen on the New York Times in 2027</Text>
       <StatusBar style="auto" />
     </View>
   )
