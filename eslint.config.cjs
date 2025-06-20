@@ -46,7 +46,7 @@ module.exports = [
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
+          // ignoreRestSiblings: true,
           // args: 'after-used', // This might help with arrow function params
         },
       ],

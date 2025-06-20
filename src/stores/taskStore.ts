@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-const noused = 3
+const nousaed = 3
 
 export type Task = {
   id: number
