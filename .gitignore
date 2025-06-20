@@ -39,3 +39,17 @@ yarn-error.*
 
 .manuals/
 .old.*
+
+
+# Graddle
+
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+
+# Bundle artifacts
+*.jsbundle

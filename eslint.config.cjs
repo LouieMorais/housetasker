@@ -34,7 +34,9 @@ module.exports = [
       'jsx-a11y': pluginJsxA11y,
     },
     rules: {
-      // Disable base rule in favor of TypeScript version
+      // Disable base rule in favor of TypeScript version,
+      // this helps with arrow function params which aren't picked
+      // by base rule
       'no-unused-vars': 'off',
       // General Best Practices
       'no-console': ['warn', { allow: ['warn', 'error'] }],
