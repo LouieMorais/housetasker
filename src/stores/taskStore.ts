@@ -5,7 +5,7 @@ import { create } from 'zustand'
 export type Task = {
   id: number
   description: string
-  status: 'Open' | 'Completed'
+  status: 'Open' | 'Completed' | 'Late'
 }
 
 type TaskState = {
