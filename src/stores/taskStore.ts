@@ -1,52 +1,29 @@
 // src/stores/taskStore.ts
 import { create } from 'zustand'
 
-type TaskStatus = 'Open' | 'Completed' | 'Late'
-
-export interface Task {
+export type Task = {
   id: number
   description: string
-  assigned_to: number
-  room_id: number
-  status: TaskStatus
-  due_date: string
-  points: number
+  status: 'Open' | 'Completed'
 }
 
-export interface HousematePoints {
-  housemate_id: number
-  total_points: number
-}
-
-interface TaskStoreState {
+type TaskState = {
   tasks: Task[]
-  leaderboard: HousematePoints[]
   isLoading: boolean
-  error: string | null
-
-  setTasks: (tasks: Task[]) => void
-  setLeaderboard: (points: HousematePoints[]) => void
-  setError: (msg: string) => void
-  setLoading: (state: boolean) => void
-
   markTaskAsCompleted: (taskId: number) => void
 }
 
-export const useTaskStore = create<TaskStoreState>((set, get) => ({
-  tasks: [],
-  leaderboard: [],
+export const useTaskStore = create<TaskState>((set) => ({
+  tasks: [
+    { id: 1, description: 'Take out the bin', status: 'Open' },
+    { id: 2, description: 'Do the washing up', status: 'Open' },
+  ],
   isLoading: false,
-  error: null,
 
-  setTasks: (tasks) => set({ tasks }),
-  setLeaderboard: (leaderboard) => set({ leaderboard }),
-  setError: (error) => set({ error }),
-  setLoading: (isLoading) => set({ isLoading }),
-
-  markTaskAsCompleted: (taskId) => {
-    const updatedTasks = get().tasks.map((task) =>
-      task.id === taskId ? { ...task, status: 'Completed' } : task
-    )
-    set({ tasks: updatedTasks })
-  },
+  markTaskAsCompleted: (taskId) =>
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === taskId ? { ...task, status: 'Completed' } : task
+      ),
+    })),
 }))
