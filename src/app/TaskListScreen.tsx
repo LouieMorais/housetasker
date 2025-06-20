@@ -3,7 +3,6 @@ import React from 'react'
 import { View, Text, ScrollView, Button } from 'react-native'
 
 import { useTaskStore } from '@/stores/taskStore'
-
 const TaskListScreen: React.FC = () => {
   const tasks = useTaskStore((state) => state.tasks)
   const isLoading = useTaskStore((state) => state.isLoading)

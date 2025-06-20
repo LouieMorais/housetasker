@@ -1,7 +1,5 @@
 import { create } from 'zustand'
 
-const nousaed = 3
-
 export type Task = {
   id: number
   description: string

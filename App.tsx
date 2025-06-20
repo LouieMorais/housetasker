@@ -11,7 +11,6 @@ const App: React.FC = () => {
     </SafeAreaView>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

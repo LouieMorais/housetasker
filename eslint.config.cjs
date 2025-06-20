@@ -42,12 +42,10 @@ module.exports = [
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       // TypeScript Specific
       '@typescript-eslint/no-unused-vars': [
-        'warn',
+        'error',
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
-          // ignoreRestSiblings: true,
-          // args: 'after-used', // This might help with arrow function params
         },
       ],
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
