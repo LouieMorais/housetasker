@@ -85,13 +85,15 @@ module.exports = [
     },
   },
   {
-    ignores: [
-      'node_modules',
-      'dist',
-      'build',
-      '.next',
-      'coverage',
-      '*.config.js',
-    ],
+    files: ['*.config.js', '*.config.cjs', 'jest.config.js'],
+    languageOptions: {
+      globals: globals.node, // Enable Node.js global variables like `module`
+    },
+    rules: {
+      'no-undef': 'off', // Disable this rule for config files
+    },
+  },
+  {
+    ignores: ['node_modules', 'dist', 'build', '.next', 'coverage'],
   },
 ]

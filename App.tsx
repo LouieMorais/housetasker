@@ -3,7 +3,7 @@ import React from 'react'
 
 import { SafeAreaView, StyleSheet } from 'react-native'
 
-import TaskListScreen from './src/app/TaskListScreen'
+import TaskListScreen from './src/app/tasks/TaskListScreen'
 
 const App: React.FC = () => {
   return (
