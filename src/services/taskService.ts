@@ -1,3 +1,4 @@
+import type { Housemate } from '@/types/housemate'
 import type { Task } from '@/types/task'
 
 import { supabase } from './supabaseClient'
@@ -30,7 +31,7 @@ export async function updateTaskStatus(
   return true
 }
 
-export async function getHousematePoints(): Promise<unknown[] | null> {
+export async function getHousematePoints(): Promise<Housemate[] | null> {
   const { data, error } = await supabase.from('housemate_points').select('*')
   if (error) {
     console.error('Error fetching housemate points:', error)
