@@ -1,10 +1,25 @@
-// /tsconfig.json
 {
-  "extends": "./node_modules/expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "allowJs": false,
+    "jsx": "react-native",
     "strict": true,
-    "baseUrl": "src",
-    "paths": { "@/*": ["*"] }
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+      "@types/*": ["types/*"],
+      "@constants/*": ["constants/*"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".App.tsx", "src/stores/taskStore.ts"]
+  "include": ["src", "__tests__"],
+  "exclude": ["node_modules", "babel.config.js", "jest.config.js"]
 }
