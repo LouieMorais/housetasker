@@ -1,14 +1,11 @@
-// src/types/task.ts
+export type TaskView = 'open' | 'completed' | 'late' | 'my'
 
 export interface Task {
   id: string
   title: string
+  status: 'open' | 'completed' | 'late'
+  assignedTo?: string
+  points?: number
   description?: string
-  due_date: string
-  completed_at?: string | null
-  status: 'open' | 'late' | 'completed'
-  assigned_to: string
-  room_id: string
-  photo_url?: string | null
-  points: number
+  image?: string
 }

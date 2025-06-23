@@ -1,30 +1,61 @@
-// src/app/TaskListScreen.tsx
-import React from 'react'
+// src/app/tasks/TaskListScreen.tsx
 
-import { View, Text, ScrollView, Button } from 'react-native'
+import React, { useState } from 'react'
 
-import { useTaskStore } from '@/stores/taskStore'
-const TaskListScreen: React.FC = () => {
-  const tasks = useTaskStore((state) => state.tasks)
-  const isLoading = useTaskStore((state) => state.isLoading)
-  const markCompleted = useTaskStore((state) => state.markTaskAsCompleted)
+import TaskCard from '@components/TaskCard'
+import { useTasks } from '@hooks/useTasks'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootStackParamList } from '@types/navigation'
+import { TaskView } from '@types/task'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
 
-  if (isLoading) return <Text>Loading...</Text>
+const TaskListScreen = () => {
+  const [selectedView, setSelectedView] = useState<TaskView>('open')
+  const { getFilteredTasks, loading } = useTasks()
+  const navigation =
+    useNavigation<
+      NativeStackNavigationProp<RootStackParamList, 'TaskListScreen'>
+    >()
+
+  const filteredTasks = getFilteredTasks(selectedView)
+
+  if (loading) {
+    return <Text style={styles.loading}>Loading...</Text>
+  }
 
   return (
-    <ScrollView>
-      {tasks.map((task) => (
-        <View key={task.id} style={{ marginBottom: 10 }}>
-          <Text>
-            {task.id} - {task.description} — {task.status}
-          </Text>
-          {task.status === 'Open' && (
-            <Button title="Done" onPress={() => markCompleted(task.id)} />
-          )}
-        </View>
-      ))}
+    <ScrollView contentContainerStyle={styles.container}>
+      {filteredTasks.length === 0 ? (
+        <Text style={styles.empty}>
+          No tasks found for "{selectedView}" view.
+        </Text>
+      ) : (
+        filteredTasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            onPress={() => navigation.navigate('TaskItemScreen', { task })}
+          />
+        ))
+      )}
     </ScrollView>
   )
 }
 
 export default TaskListScreen
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  loading: {
+    padding: 20,
+    textAlign: 'center',
+  },
+  empty: {
+    padding: 20,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+})

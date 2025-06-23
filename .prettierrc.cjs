@@ -1,3 +1,5 @@
+// .prettierrc.cjs
+
 module.exports = {
   printWidth: 80, // Max line width before wrapping
   tabWidth: 2, // Spaces per indentation level

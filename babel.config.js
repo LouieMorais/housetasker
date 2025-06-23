@@ -1,3 +1,5 @@
+// babel.config.js
+
 module.exports = function (api) {
   api.cache(true)
   return {
@@ -8,6 +10,7 @@ module.exports = function (api) {
         {
           root: ['./src'],
           alias: {
+            '@app': './src/app',
             '@components': './src/components',
             '@hooks': './src/hooks',
             '@services': './src/services',
