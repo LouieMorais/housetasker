@@ -21,6 +21,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onPress }) => {
         <Text style={styles.title}>{task.title}</Text>
         <Text>Status: {task.status}</Text>
         <Text>Points: {task.points}</Text>
+        <Text>Points: {task.points}</Text>
       </View>
     </TouchableOpacity>
   )

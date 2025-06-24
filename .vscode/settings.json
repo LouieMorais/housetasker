@@ -5,5 +5,5 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["apikey", "housetasker", "SUPABASE"]
+  "cSpell.words": ["apikey", "housetasker", "mobileprovision", "SUPABASE"]
 }

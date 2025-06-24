@@ -42,4 +42,4 @@ yarn-error.*
 .manuals/
 .old.*
 
-DevSupabaseTestScreen.tsx
+src/app/DevSupabaseTestScreen.tsx

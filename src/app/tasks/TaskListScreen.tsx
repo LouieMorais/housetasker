@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 
+import FilterDropdown from '@components/FilterDropdown'
 import TaskCard from '@components/TaskCard'
 import { useTasks } from '@hooks/useTasks'
 import { useNavigation } from '@react-navigation/native'
@@ -26,6 +27,7 @@ const TaskListScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <FilterDropdown selectedView={selectedView} onSelect={setSelectedView} />
       {filteredTasks.length === 0 ? (
         <Text style={styles.empty}>
           No tasks found for "{selectedView}" view.
