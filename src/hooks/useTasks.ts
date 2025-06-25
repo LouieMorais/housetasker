@@ -1,22 +1,28 @@
-// src/hooks/useTasks.ts
-
 import { useEffect, useState } from 'react'
 
 import { supabase } from '@services/supabaseClient'
 import { Task, TaskView } from '@types/task'
 
-export const useTasks = () => {
+const HOUSEMATE_ID = '00000000-0000-0000-0000-000000000012' // Louie's UUID
+
+export function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchTasks = async () => {
       setLoading(true)
-      const { data, error } = await supabase.from('tasks').select('*')
+      const { data, error } = await supabase.from('tasks').select(
+        `
+          *,
+          housemates:assigned_to (display_name, avatar_url),
+          rooms:room_id (name)
+        `
+      )
 
       if (error) {
-        setError(error.message)
+        console.error('Supabase task fetch error:', error.message)
+        setTasks([])
         setLoading(false)
         return
       }
@@ -28,28 +34,20 @@ export const useTasks = () => {
     fetchTasks()
   }, [])
 
-  const getFilteredTasks = (view: TaskView) => {
+  function getFilteredTasks(view: TaskView): Task[] {
     switch (view) {
+      case 'my':
+        return tasks.filter((task) => task.assigned_to === HOUSEMATE_ID)
       case 'open':
         return tasks.filter((task) => task.status === 'open')
       case 'completed':
         return tasks.filter((task) => task.status === 'completed')
       case 'late':
         return tasks.filter((task) => task.status === 'late')
-      case 'my':
-        // Replace with dynamic logic later
-        return tasks.filter(
-          (task) => task.assigned_to === '00000000-0000-0000-0000-000000000012' // Louie (hardcoded)
-        )
       default:
         return tasks
     }
   }
 
-  return {
-    loading,
-    error,
-    tasks,
-    getFilteredTasks,
-  }
+  return { tasks, getFilteredTasks, loading }
 }

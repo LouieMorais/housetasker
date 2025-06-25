@@ -1,6 +1,6 @@
 // src/app/tasks/TaskListScreen.tsx
 
-import React, { useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 
 import FilterDropdown from '@components/FilterDropdown'
 import TaskCard from '@components/TaskCard'
@@ -12,12 +12,24 @@ import { TaskView } from '@types/task'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 
 const TaskListScreen = () => {
-  const [selectedView, setSelectedView] = useState<TaskView>('open')
+  const [selectedView, setSelectedView] = useState<TaskView>('my') // FIXED default tab
   const { getFilteredTasks, loading } = useTasks()
+
   const navigation =
     useNavigation<
       NativeStackNavigationProp<RootStackParamList, 'TaskListScreen'>
     >()
+
+  useLayoutEffect(() => {
+    const titles: Record<TaskView, string> = {
+      my: 'My Tasks',
+      open: 'Open Tasks',
+      completed: 'Completed Tasks',
+      late: 'Late Tasks',
+    }
+
+    navigation.setOptions({ title: titles[selectedView] })
+  }, [navigation, selectedView])
 
   const filteredTasks = getFilteredTasks(selectedView)
 

@@ -1,6 +1,6 @@
 // src/utils/sortTasks.ts
 
-import type { Task } from '../types/task'
+import type { Task } from '@types/task'
 
 export function filterByStatus(
   tasks: Task[] = [],

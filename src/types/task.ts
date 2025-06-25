@@ -1,4 +1,4 @@
-export type TaskView = 'open' | 'completed' | 'late' | 'my'
+export type TaskView = 'my' | 'open' | 'completed' | 'late'
 
 export interface Task {
   id: string

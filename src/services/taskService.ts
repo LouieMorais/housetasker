@@ -1,8 +1,8 @@
 // src/services/taskService.ts
 
-import { supabase } from './supabaseClient'
+import { supabase } from '@supabaseClient'
 
-import type { Task } from '../types/task'
+import type { Task } from '@types/task'
 
 export async function getAllTasks(): Promise<Task[] | null> {
   const { data, error } = await supabase.from('tasks').select('*')

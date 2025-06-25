@@ -19,7 +19,8 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@types/*": ["types/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@theme": ["theme"]
     }
   },
   "include": ["src", "__tests__", "src/app/App.tsx"],

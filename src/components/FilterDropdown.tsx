@@ -2,38 +2,42 @@
 
 import React from 'react'
 
-import { TaskView } from '@types/task'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import theme from '@theme'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+
+import type { TaskView } from '@types/task'
 
 interface FilterDropdownProps {
   selectedView: TaskView
   onSelect: (view: TaskView) => void
 }
 
-const options: TaskView[] = ['my', 'open', 'completed', 'late']
+const views: { key: TaskView; label: string }[] = [
+  { key: 'my', label: 'My Tasks' }, // FIXED label
+  { key: 'open', label: 'Open' },
+  { key: 'completed', label: 'Completed' },
+  { key: 'late', label: 'Late' },
+]
 
 const FilterDropdown: React.FC<FilterDropdownProps> = ({
   selectedView,
   onSelect,
 }) => {
   return (
-    <View style={styles.container}>
-      {options.map((option) => (
+    <View style={styles.row}>
+      {views.map(({ key, label }) => (
         <TouchableOpacity
-          key={option}
-          style={[
-            styles.option,
-            selectedView === option && styles.selectedOption,
-          ]}
-          onPress={() => onSelect(option)}
+          key={key}
+          onPress={() => onSelect(key)}
+          style={[styles.button, selectedView === key && styles.buttonSelected]}
         >
           <Text
             style={[
-              styles.optionText,
-              selectedView === option && styles.selectedText,
+              styles.buttonText,
+              selectedView === key && styles.buttonTextSelected,
             ]}
           >
-            {option.toUpperCase()}
+            {label}
           </Text>
         </TouchableOpacity>
       ))}
@@ -44,24 +48,30 @@ const FilterDropdown: React.FC<FilterDropdownProps> = ({
 export default FilterDropdown
 
 const styles = StyleSheet.create({
-  container: {
+  row: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 16,
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing.md,
   },
-  option: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 4,
-    backgroundColor: '#eee',
+  button: {
+    flex: 1,
+    paddingVertical: theme.spacing.sm,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.md,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    marginRight: theme.spacing.sm,
   },
-  selectedOption: {
-    backgroundColor: '#cce5ff',
+  buttonSelected: {
+    backgroundColor: theme.colors.primary,
   },
-  optionText: {
-    fontSize: 14,
+  buttonText: {
+    textAlign: 'center',
+    fontSize: theme.fontSizes.sm,
+    color: theme.colors.text,
   },
-  selectedText: {
-    fontWeight: 'bold',
+  buttonTextSelected: {
+    color: '#fff',
+    fontWeight: theme.fontWeight[600],
   },
 })
