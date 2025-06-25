@@ -1,60 +1,42 @@
-// App.tsx
+// App.tsx (root)
 
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Text, View } from 'react-native'
+import { RootStackParamList } from './src/types/navigation'
 
-// TEMP: Supabase test screen
-import DevSupabaseTestScreen from '@app/DevSupabaseTestScreen'
+import SplashScreen from './src/app/SplashScreen'
+import TaskListScreen from './src/app/tasks/TaskListScreen'
+import TaskItemScreen from './src/app/tasks/TaskItemScreen'
+import CongratsScreen from './src/app/CongratsScreen'
 
-const Stack = createNativeStackNavigator()
-
-function ErrorFallback({ error }: { error: Error }) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
-        App Error
-      </Text>
-      <Text>{error.message}</Text>
-    </View>
-  )
-}
-
-class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { hasError: boolean; error?: Error }
-> {
-  constructor(props: any) {
-    super(props)
-    this.state = { hasError: false }
-  }
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error }
-  }
-
-  render() {
-    if (this.state.hasError && this.state.error) {
-      console.log('App crashed with:', this.state.error)
-      return <ErrorFallback error={this.state.error} />
-    }
-    return this.props.children
-  }
-}
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export default function App() {
   return (
-    <ErrorBoundary>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="DevSupabaseTestScreen"
-            component={DevSupabaseTestScreen}
-            options={{ title: 'Supabase Test' }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ErrorBoundary>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TaskListScreen"
+          component={TaskListScreen}
+          options={{ title: 'My Tasks' }}
+        />
+        <Stack.Screen
+          name="TaskItemScreen"
+          component={TaskItemScreen}
+          options={{ title: 'Task Details' }}
+        />
+        <Stack.Screen
+          name="CongratsScreen"
+          component={CongratsScreen}
+          options={{ title: 'Well Done!' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }

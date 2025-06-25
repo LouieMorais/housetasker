@@ -18,10 +18,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onPress }) => {
         <Image source={{ uri: task.photo_url }} style={styles.image} />
       )}
       <View style={styles.info}>
+        <Text style={styles.room}>{task.rooms?.name || 'N/A'}</Text>
         <Text style={styles.title}>{task.title}</Text>
+        <Text>{task.description}</Text>
+        <Text>Assigned to: {task.housemates?.display_name || 'Unknown'}</Text>
+        <Text>Points: {task.points}</Text>
+        <Text>Due on: {task.due_date}</Text>
         <Text>Status: {task.status}</Text>
-        <Text>Points: {task.points}</Text>
-        <Text>Points: {task.points}</Text>
       </View>
     </TouchableOpacity>
   )
