@@ -43,3 +43,5 @@ yarn-error.*
 .old.*
 
 src/app/DevSupabaseTestScreen.tsx
+db/.archive/
+db/.db backups/
