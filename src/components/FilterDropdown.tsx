@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     marginBottom: theme.spacing.md,
   },
   button: {
-    flex: 1,
     paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.sm,
     backgroundColor: theme.colors.surface,
     borderRadius: theme.borderRadius.md,
     borderWidth: 1,
