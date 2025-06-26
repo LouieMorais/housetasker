@@ -1,19 +1,28 @@
 // src/app/tasks/TaskListScreen.tsx
 
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState, useLayoutEffect, useCallback } from 'react'
 
 import FilterDropdown from '@components/FilterDropdown'
 import TaskCard from '@components/TaskCard'
 import { useTasks } from '@hooks/useTasks'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useRoute, RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '@types/navigation'
 import { TaskView } from '@types/task'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, StyleSheet } from 'react-native'
 
 const TaskListScreen = () => {
-  const [selectedView, setSelectedView] = useState<TaskView>('my') // FIXED default tab
-  const { getFilteredTasks, loading } = useTasks()
+  const route = useRoute<RouteProp<RootStackParamList, 'TaskListScreen'>>()
+  const [selectedView, setSelectedView] = useState<TaskView>(
+    route.params?.initialView || 'my'
+  )
+
+  const {
+    getFilteredTasks,
+    loading,
+    reloadTasks, // refreshed via useFocusEffect
+  } = useTasks()
 
   const navigation =
     useNavigation<
@@ -31,6 +40,12 @@ const TaskListScreen = () => {
     navigation.setOptions({ title: titles[selectedView] })
   }, [navigation, selectedView])
 
+  useFocusEffect(
+    useCallback(() => {
+      reloadTasks()
+    }, [reloadTasks])
+  )
+
   const filteredTasks = getFilteredTasks(selectedView)
 
   if (loading) {
@@ -40,6 +55,7 @@ const TaskListScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <FilterDropdown selectedView={selectedView} onSelect={setSelectedView} />
+
       {filteredTasks.length === 0 ? (
         <Text style={styles.empty}>
           No tasks found for "{selectedView}" view.

@@ -1,53 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 import { supabase } from '@services/supabaseClient'
-import { Task, TaskView } from '@types/task'
-
-const HOUSEMATE_ID = '00000000-0000-0000-0000-000000000012' // Louie's UUID
+import { Task } from '@types/task'
+import { TaskView } from '@types/task'
+import { sortTasks } from '@utils/sortTasks'
 
 export function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setLoading(true)
-      const { data, error } = await supabase.from('tasks').select(
+  const fetchTasks = useCallback(async () => {
+    setLoading(true)
+    const { data, error } = await supabase.from('tasks').select(
         `
           *,
           housemates:assigned_to (display_name, avatar_url),
           rooms:room_id (name)
         `
       )
-
-      if (error) {
-        console.error('Supabase task fetch error:', error.message)
-        setTasks([])
-        setLoading(false)
-        return
-      }
-
-      setTasks(data || [])
-      setLoading(false)
-    }
-
-    fetchTasks()
+    if (!error && data) setTasks(data as Task[])
+    setLoading(false)
   }, [])
 
-  function getFilteredTasks(view: TaskView): Task[] {
-    switch (view) {
-      case 'my':
-        return tasks.filter((task) => task.assigned_to === HOUSEMATE_ID)
-      case 'open':
-        return tasks.filter((task) => task.status === 'open')
-      case 'completed':
-        return tasks.filter((task) => task.status === 'completed')
-      case 'late':
-        return tasks.filter((task) => task.status === 'late')
-      default:
-        return tasks
-    }
+  useEffect(() => {
+    fetchTasks()
+  }, [fetchTasks])
+
+  const getFilteredTasks = (view: TaskView): Task[] => {
+    return sortTasks(view, tasks)
   }
 
-  return { tasks, getFilteredTasks, loading }
+  return {
+    tasks,
+    loading,
+    getFilteredTasks,
+    reloadTasks: fetchTasks,
+  }
 }

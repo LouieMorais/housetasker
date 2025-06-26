@@ -1,6 +1,4 @@
-// src/services/taskService.ts
-
-import { supabase } from '@supabaseClient'
+import { supabase } from './supabaseClient'
 
 import type { Task } from '@types/task'
 

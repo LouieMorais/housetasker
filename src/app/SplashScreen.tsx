@@ -19,9 +19,7 @@ const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to HouseTasker</Text>
-      <Text style={styles.subtitle}>
-        Manage your shared house tasks easily.
-      </Text>
+      <Text style={styles.subtitle}>Your Personal House Chores Tracker.</Text>
       <Button title="Continue" onPress={handleContinue} />
     </View>
   )
@@ -40,6 +38,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 12,
   },
   subtitle: {

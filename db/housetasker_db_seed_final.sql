@@ -1,122 +1,41 @@
-INSERT INTO
-    house (id, address_line_1, postcode)
-VALUES (
-        '00000000-0000-0000-0000-000000000001',
-        '77 Melbourne Avenue',
-        'HA89 5HD'
-    );
+create or replace function reseed_demo_data () returns void language plpgsql as $func$
+begin
+  -- Delete in order to satisfy FK constraints
+  delete from tasks;
+  delete from rooms;
+  delete from housemates;
+  delete from house;
 
-INSERT INTO
-    housemates (
-        id,
-        house_id,
-        display_name,
-        avatar_url
-    )
-VALUES (
-        '00000000-0000-0000-0000-000000000011',
-        '00000000-0000-0000-0000-000000000001',
-        'Anna Hailstone',
-        'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/anna.jpg'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000012',
-        '00000000-0000-0000-0000-000000000001',
-        'Louie Morais',
-        'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/louie.jpg'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000013',
-        '00000000-0000-0000-0000-000000000001',
-        'Ryan Abif',
-        'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/ryan.jpg'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000014',
-        '00000000-0000-0000-0000-000000000001',
-        'Sean Hutchinson',
-        'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/sean.jpg'
-    );
+  -- Insert seed data
+  insert into house (id, address_line_1, postcode) values
+  ('00000000-0000-0000-0000-000000000001', '77 Melbourne Avenue', 'HA89 5HD');
 
-INSERT INTO
-    rooms (id, house_id, name)
-VALUES (
-        '00000000-0000-0000-0000-000000000111',
-        '00000000-0000-0000-0000-000000000001',
-        'Stairs'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000112',
-        '00000000-0000-0000-0000-000000000001',
-        'Bins'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000113',
-        '00000000-0000-0000-0000-000000000001',
-        'Living Room'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000114',
-        '00000000-0000-0000-0000-000000000001',
-        'Bathroom'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000115',
-        '00000000-0000-0000-0000-000000000001',
-        'Conservatory'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000116',
-        '00000000-0000-0000-0000-000000000001',
-        'Bedroom - Anna'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000117',
-        '00000000-0000-0000-0000-000000000001',
-        'Garage'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000118',
-        '00000000-0000-0000-0000-000000000001',
-        'Kitchen'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000119',
-        '00000000-0000-0000-0000-000000000001',
-        'Front Garden'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000120',
-        '00000000-0000-0000-0000-000000000001',
-        'Dining Room'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000121',
-        '00000000-0000-0000-0000-000000000001',
-        'Washroom'
-    ),
-    (
-        '00000000-0000-0000-0000-000000000122',
-        '00000000-0000-0000-0000-000000000001',
-        'Bedroom - Ryan'
-    );
+  insert into housemates (id, house_id, display_name, avatar_url) values
+  ('00000000-0000-0000-0000-000000000011', '00000000-0000-0000-0000-000000000001', 'Anna Hailstone', 'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/anna.jpg'),
+  ('00000000-0000-0000-0000-000000000012', '00000000-0000-0000-0000-000000000001', 'Louie Morais', 'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/louie.jpg'),
+  ('00000000-0000-0000-0000-000000000013', '00000000-0000-0000-0000-000000000001', 'Ryan Abif', 'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/ryan.jpg'),
+  ('00000000-0000-0000-0000-000000000014', '00000000-0000-0000-0000-000000000001', 'Sean Hutchinson', 'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/sean.jpg');
 
-INSERT INTO
-    tasks (
-        id,
-        house_id,
-        title,
-        description,
-        room_id,
-        assigned_to,
-        points,
-        status,
-        due_date,
-        completed_at,
-        photo_url,
-        created_at
-    )
-VALUES (
+  insert into rooms (id, house_id, name) values
+  ('00000000-0000-0000-0000-000000000111', '00000000-0000-0000-0000-000000000001', 'Stairs'),
+  ('00000000-0000-0000-0000-000000000112', '00000000-0000-0000-0000-000000000001', 'Bins'),
+  ('00000000-0000-0000-0000-000000000113', '00000000-0000-0000-0000-000000000001', 'Living Room'),
+  ('00000000-0000-0000-0000-000000000114', '00000000-0000-0000-0000-000000000001', 'Bathroom'),
+  ('00000000-0000-0000-0000-000000000115', '00000000-0000-0000-0000-000000000001', 'Conservatory'),
+  ('00000000-0000-0000-0000-000000000116', '00000000-0000-0000-0000-000000000001', 'Bedroom - Anna'),
+  ('00000000-0000-0000-0000-000000000117', '00000000-0000-0000-0000-000000000001', 'Garage'),
+  ('00000000-0000-0000-0000-000000000118', '00000000-0000-0000-0000-000000000001', 'Kitchen'),
+  ('00000000-0000-0000-0000-000000000119', '00000000-0000-0000-0000-000000000001', 'Front Garden'),
+  ('00000000-0000-0000-0000-000000000120', '00000000-0000-0000-0000-000000000001', 'Dining Room'),
+  ('00000000-0000-0000-0000-000000000121', '00000000-0000-0000-0000-000000000001', 'Washroom'),
+  ('00000000-0000-0000-0000-000000000122', '00000000-0000-0000-0000-000000000001', 'Bedroom - Ryan');
+
+  -- Insert task data (already clean)
+  insert into tasks (
+    id, house_id, title, description, room_id, assigned_to, points,
+    status, due_date, completed_at, photo_url, created_at
+  ) values
+ (
         '1f5e0e3b-f561-4752-8c1e-7f3a0b265614',
         '00000000-0000-0000-0000-000000000001',
         'Vacuum the Stairs New Carpet: Sweep Fibre Build-Up First',
@@ -171,6 +90,20 @@ VALUES (
         null,
         'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/rooms/kitchen.jpg',
         '2025-06-07 13:00:00'
+    ),
+    (
+        '7bf9dcd5-4609-4c92-b3aa-ea507ca5e9e4', 
+        '00000000-0000-0000-0000-000000000001', 
+        'Change Bedsheets - Anna’s Room',
+        'Anna, your bedsheets need changing this week. Clean sheets are in the airing cupboard. Please pop the old ones in the laundry basket after. ❤️', 
+        '00000000-0000-0000-0000-000000000116', 
+        '00000000-0000-0000-0000-000000000011', 
+        '7', 
+        'late', 
+        '2025-06-14 00:00:00', 
+        null, 
+        'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/rooms/bedroomanna.jpg', 
+        '2025-06-07 12:40:00'
     ),
     (
         'a7b8bcb0-c497-4fa1-a937-4f03996925f5',
@@ -270,3 +203,5 @@ VALUES (
         'https://raw.githubusercontent.com/LouieMorais/housetasker/refs/heads/main/src/assets/img/rooms/washroom.jpg',
         '2025-06-07 13:30:00'
     );
+        end;
+$func$;

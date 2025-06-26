@@ -5,6 +5,7 @@ import React from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { RouteProp } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { updateTaskStatus } from '@services/taskService'
 import theme from '@theme'
 import { RootStackParamList } from '@types/navigation'
 import dayjs from 'dayjs'
@@ -22,7 +23,13 @@ const TaskItemScreen = () => {
     params: { task },
   } = useRoute<Route>()
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
+    const success = await updateTaskStatus(task.id, 'completed')
+    if (!success) {
+      Alert.alert('Error', 'Failed to update task status.')
+      return
+    }
+
     navigation.navigate('CongratsScreen', {
       taskTitle: task.title,
       points: task.points ?? 0,
