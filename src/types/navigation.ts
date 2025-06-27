@@ -6,5 +6,5 @@ export type RootStackParamList = {
   SplashScreen: undefined
   TaskListScreen: undefined
   TaskItemScreen: { task: Task }
-  CongratsScreen: { taskTitle: string; points: number }
+  CongratsScreen: { taskTitle: string}
 }

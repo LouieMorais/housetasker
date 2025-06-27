@@ -13,10 +13,8 @@ interface FilterDropdownProps {
 }
 
 const views: { key: TaskView; label: string }[] = [
-  { key: 'my', label: 'My Tasks' }, // FIXED label
   { key: 'open', label: 'Open' },
   { key: 'completed', label: 'Completed' },
-  { key: 'late', label: 'Late' },
 ]
 
 const FilterDropdown: React.FC<FilterDropdownProps> = ({
@@ -50,7 +48,7 @@ export default FilterDropdown
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginBottom: theme.spacing.md,
   },
   button: {

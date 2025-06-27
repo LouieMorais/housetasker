@@ -32,7 +32,6 @@ const TaskItemScreen = () => {
 
     navigation.navigate('CongratsScreen', {
       taskTitle: task.title,
-      points: task.points ?? 0,
     })
   }
 
@@ -62,9 +61,6 @@ const TaskItemScreen = () => {
         {task.photo_url && (
           <Image source={{ uri: task.photo_url }} style={styles.image} />
         )}
-        <View style={styles.pointsBadge}>
-          <Text style={styles.pointsText}>{task.points} pts</Text>
-        </View>
       </View>
 
       <View style={styles.pillRow}>
@@ -74,9 +70,7 @@ const TaskItemScreen = () => {
             styles.statusPill,
             task.status === 'completed'
               ? styles.pillSuccess
-              : task.status === 'late'
-                ? styles.pillDanger
-                : styles.pillPrimary,
+              : styles.pillPrimary,
           ]}
         >
           <Text style={styles.pillText}>{task.status}</Text>
@@ -88,9 +82,7 @@ const TaskItemScreen = () => {
             styles.duePill,
             task.status === 'completed'
               ? styles.pillSuccess
-              : task.status === 'late'
-                ? styles.pillDanger
-                : styles.pillPrimary,
+              : styles.pillPrimary,
           ]}
         >
           <Text style={styles.pillText}>
@@ -141,21 +133,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: theme.borderRadius.md,
-  },
-  pointsBadge: {
-    position: 'absolute',
-    top: theme.spacing.sm,
-    right: theme.spacing.sm,
-    backgroundColor: theme.colors.primary,
-    borderRadius: theme.borderRadius.md,
-    paddingVertical: theme.spacing.xs,
-    paddingHorizontal: theme.spacing.sm,
-    zIndex: 1,
-  },
-  pointsText: {
-    color: '#fff',
-    fontSize: theme.fontSizes.sm,
-    fontWeight: theme.fontWeight[700],
   },
   assignedRow: {
     flexDirection: 'row',
@@ -217,9 +194,6 @@ const styles = StyleSheet.create({
   },
   pillSuccess: {
     backgroundColor: theme.colors.success,
-  },
-  pillDanger: {
-    backgroundColor: theme.colors.danger,
   },
   description: {
     fontSize: theme.fontSizes.sm,

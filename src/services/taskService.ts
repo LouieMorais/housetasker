@@ -13,7 +13,7 @@ export async function getAllTasks(): Promise<Task[] | null> {
 
 export async function updateTaskStatus(
   taskId: string,
-  status: 'completed' | 'open' | 'late'
+  status: 'completed' | 'open'
 ): Promise<boolean> {
   const { error } = await supabase
     .from('tasks')
@@ -28,13 +28,4 @@ export async function updateTaskStatus(
     return false
   }
   return true
-}
-
-export async function getHousematePoints(): Promise<any[] | null> {
-  const { data, error } = await supabase.from('housemate_points').select('*')
-  if (error) {
-    console.error('Error fetching housemate points:', error)
-    return null
-  }
-  return data
 }

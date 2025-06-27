@@ -27,7 +27,7 @@ export function sortTasks(view: TaskView, tasks: Task[]): Task[] {
 
 export function filterByStatus(
   tasks: Task[] = [],
-  status: 'open' | 'late' | 'completed'
+  status: 'open' | 'completed'
 ): Task[] {
   return tasks.filter((task) => task.status === status)
 }

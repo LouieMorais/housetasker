@@ -1,9 +1,8 @@
-export type TaskView = 'my' | 'open' | 'completed' | 'late'
-
+export type TaskView = 'open' | 'completed'
 export interface Task {
   id: string
   title: string
-  status: 'open' | 'completed' | 'late'
+  status: 'open' | 'completed'
   assignedTo?: string
   points?: number
   description?: string

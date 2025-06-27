@@ -19,7 +19,7 @@ const SplashScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to HouseTasker</Text>
-      <Text style={styles.subtitle}>Your Personal House Chores Tracker.</Text>
+      <Text style={styles.subtitle}>Your Personal House Tasks Organiser.</Text>
       <Button title="Continue" onPress={handleContinue} />
     </View>
   )

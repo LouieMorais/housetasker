@@ -15,7 +15,7 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native'
 const TaskListScreen = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'TaskListScreen'>>()
   const [selectedView, setSelectedView] = useState<TaskView>(
-    route.params?.initialView || 'my'
+    route.params?.initialView || 'open'
   )
 
   const {
@@ -31,10 +31,8 @@ const TaskListScreen = () => {
 
   useLayoutEffect(() => {
     const titles: Record<TaskView, string> = {
-      my: 'My Tasks',
       open: 'Open Tasks',
       completed: 'Completed Tasks',
-      late: 'Late Tasks',
     }
 
     navigation.setOptions({ title: titles[selectedView] })
